@@ -1,7 +1,6 @@
 package inflearn.자료구조활용.최대길이연속수열;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Solution {
 	public int solution(int[] nums) {
@@ -10,17 +9,14 @@ public class Solution {
 		for (Integer x : nums)
 			set.add(x);
 		if (set.size() == 1) return 1;
-		List<Integer> arr = set.stream().sorted().collect(Collectors.toList());
-		int N = arr.size();
-		int cnt = 0;
-		for (int i = 0; i < N; i++) {
-			cnt++;
-			if (i == N - 1 && arr.get(i - 1) + 1 == arr.get(i)) {
-				answer = Math.max(answer, cnt);
-			} else if (i < N - 1 && arr.get(i) + 1 != arr.get(i + 1)) {
-				answer = Math.max(answer, cnt);
-				cnt = 0;
+		for (int x : set) {
+			if (set.contains(x - 1)) continue;;
+			int cnt = 0;
+			while (set.contains(x)) {
+				cnt++;
+				x++;
 			}
+			answer = Math.max(answer, cnt);
 		}
 
 		return answer;
