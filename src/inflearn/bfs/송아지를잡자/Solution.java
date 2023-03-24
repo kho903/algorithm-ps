@@ -14,20 +14,11 @@ class Solution {
 			cnt++;
 			while (size-- > 0) {
 				int x = q.poll();
-				int nx = x - 1;
-				if (nx >= 0 && !visited[cnt % 2][nx]) {
-					visited[cnt % 2][nx] = true;
-					q.offer(nx);
-				}
-				nx = x + 1;
-				if (nx < 200001 && !visited[cnt % 2][nx]) {
-					visited[cnt % 2][nx] = true;
-					q.offer(nx);
-				}
-				nx = 2 * x;
-				if (nx < 200001 && !visited[cnt % 2][nx]) {
-					visited[cnt % 2][nx] = true;
-					q.offer(nx);
+				for (int nx : new int[] {x - 1, x + 1, x * 2}) {
+					if (nx >= 0 && nx <= 200000 && !visited[cnt % 2][nx]) {
+						visited[cnt % 2][nx] = true;
+						q.offer(nx);
+					}
 				}
 			}
 			e += cnt;
